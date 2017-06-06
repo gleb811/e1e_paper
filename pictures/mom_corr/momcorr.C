@@ -1,0 +1,182 @@
+void momcorr (){
+gStyle ->SetPalette(1);
+gStyle->SetOptStat("e");
+gStyle ->SetOptFit(0011);
+gStyle ->SetStatW(0.2);
+gStyle ->SetStatH(0.1);
+gStyle ->SetStatY(1.);
+gStyle ->SetStatX(0.95);
+gStyle ->SetStatFontSize(0.03);
+gStyle->SetTitleSize(0.1,"t");
+gStyle->SetTitleAlign(33); 
+gStyle->SetTitleX(.55);
+gStyle->SetTitleY(1.02);
+
+Short_t j;
+ostringstream qqq;
+ostringstream qqq1;
+ostringstream qqq2;
+Double_t MEAN_b [6];
+Double_t MEAN_a [6];
+Double_t sector [6];
+Double_t meantot;
+meantot = 0;
+TCanvas *c = new TCanvas("c","c",0,0,500,500);
+c -> Divide (2,3);
+TCanvas *c1 = new TCanvas("c1","c1",0,0,500,500);
+c1 -> Divide (2,3);
+//TCanvas *c2 = new TCanvas("c2","c2",0,0,500,500);
+TCanvas *c3 = new TCanvas("c3","c3",0,0,300,300);
+TH1 *h;
+TH1 *h1;
+TH1 *h2;
+
+TFile *MyFile = new TFile("test_mom_corr_test1.root","READ");
+TFile *MyFile1 = new TFile("test_mom_no_corr3.root","READ");
+
+for (j=0; j<6; j++){
+sector[j] = j+1;
+cout << sector[j] << "TTTTTTTT";
+qqq.str("");
+qqq << "mom_corr/W_before_sector" << j;
+MyFile->GetObject(qqq.str().c_str(),h);
+c->cd(j+1);
+qqq2.str("");
+qqq2 << "sector " << j+1;
+h->SetTitle(qqq2.str().c_str());
+//h->SetTitleSize(0.02);
+h->Draw();
+
+c->cd(j+1)->SetBottomMargin(0.2);
+c->cd(j+1)->SetLeftMargin(0.2);
+h->GetXaxis()->SetLabelSize(0.08);
+h->GetXaxis()->SetNdivisions(5);
+h->GetYaxis()->SetLabelSize(0.08);
+h->GetYaxis()->SetNdivisions(5);
+h->GetXaxis()->SetTitle("W (GeV)");
+h->GetXaxis()->SetTitleSize(0.1);
+h->GetYaxis()->SetTitle("Counts");
+h->GetYaxis()->SetTitleSize(0.1);
+
+//h->GetYaxis()->SetTitleOffset(0.8);
+Double_t par_b[7];
+TF1 *g1 = new TF1("m1","gaus",0.91, 0.97);
+TF1 *g4 = new TF1("m4","pol3",0.91, 1.05);
+TF1 *total1 = new TF1("mstotal1","gaus(0)+pol3(3)",0.9,1.05);
+h->Fit(g1,"NR");
+h->Fit(g4,"NR+");
+g1->GetParameters(&par_b[0]);
+g4->GetParameters(&par_b[3]);
+total1->SetParameters(par_b);
+h->Fit(total1,"R+");
+h->Draw();
+Double_t MEAN1 = total1->GetParameter(1);
+MEAN_b[j] = MEAN1;
+cout << "QQQ" << MEAN1;
+
+//AFTER
+qqq1.str("");
+qqq1 << "mom_corr/W_before_sector" << j;
+MyFile1->GetObject(qqq1.str().c_str(),h1);
+c1->cd(j+1);
+h1->Draw();
+qqq2.str("");
+qqq2 << "sector " << j+1;
+h1->SetTitle(qqq2.str().c_str());
+//h1->SetTitleSize(0.2);
+c1->cd(j+1)->SetBottomMargin(0.2);
+c1->cd(j+1)->SetLeftMargin(0.2);
+h1->GetXaxis()->SetLabelSize(0.08);
+h1->GetXaxis()->SetNdivisions(5);
+h1->GetYaxis()->SetLabelSize(0.08);
+h1->GetYaxis()->SetNdivisions(5);
+h1->GetXaxis()->SetTitle("W (GeV)");
+h1->GetXaxis()->SetTitleSize(0.1);
+h1->GetYaxis()->SetTitle("Counts");
+h1->GetYaxis()->SetTitleSize(0.1);
+Double_t par_a[7];
+TF1 *g2 = new TF1("m2","gaus",0.91, 0.97);
+TF1 *g3 = new TF1("m3","pol3",0.91, 1.05);
+TF1 *total = new TF1("mstotal","gaus(0)+pol3(3)",0.9,1.05);
+h1->Fit(g2,"NR");
+h1->Fit(g3,"NR+");
+g2->GetParameters(&par_a[0]);
+g3->GetParameters(&par_a[3]);
+//cout << g2->GetParError(1) << "ooo"<< "\n";
+total->SetParameters(par_a);
+h1->Fit(total,"R+");
+h1->Draw();
+Double_t MEAN = total->GetParameter(1);
+MEAN_a[j] = MEAN;
+meantot=meantot+MEAN;
+//cout << "QQQ" << MEAN_a[j];
+
+};
+
+/*
+gDirectory->GetObject("W_1",h2);
+c2->cd();
+h2->Draw();
+
+h2->SetTitle("W_sector1");
+//h1->SetTitleSize(0.2);
+//c2->cd(j+1)->SetBottomMargin(0.2);
+//c2->cd(j+1)->SetLeftMargin(0.2);
+h2->GetXaxis()->SetLabelSize(0.06);
+h2->GetXaxis()->SetNdivisions(5);
+h2->GetYaxis()->SetLabelSize(0.05);
+h2->GetYaxis()->SetNdivisions(5);
+h2->GetXaxis()->SetTitle("W, GeV");
+h2->GetXaxis()->SetTitleSize(0.05);
+h2->GetYaxis()->SetTitle("events");
+h2->GetYaxis()->SetTitleSize(0.05);
+*/
+
+c3->cd();
+c3->cd()->SetLeftMargin(0.2);
+c3->cd()->SetRightMargin(0.01);
+c3->cd()->SetTopMargin(0.01);
+c3->cd()->SetBottomMargin(0.16);
+TGraph*gr2 = new TGraphErrors (6, sector, MEAN_b);
+//gr2 -> Draw("AP*");
+gr2->SetMarkerColor(1);
+gr2->SetMarkerStyle(21);
+gr2->SetMarkerSize(1.2);
+TGraph*gr3 = new TGraph (6, sector, MEAN_a);
+gr2->SetTitle("");
+gr3->SetTitle("");
+gr3->GetXaxis()->SetTitle("Sector number");
+gr3->GetXaxis()->SetTitleOffset(0.9);
+gr3->GetXaxis()->SetTitleSize(0.07);
+gr3->GetXaxis()->SetLabelSize(0.06);
+gr3->GetYaxis()->SetLabelSize(0.06);
+gr3->GetYaxis()->SetNdivisions(7);
+gr3->GetYaxis()->SetTitleOffset(1.5);
+gr3->GetYaxis()->SetTitleSize(0.07);
+gr3->GetYaxis()->SetTitle("Elastic peak position (GeV)");
+gr3 -> Draw("AP*");
+gr2 -> Draw("P*");
+gr3->SetMarkerStyle(21);
+gr3->SetMarkerSize(1.2);
+TLine *line_l = new TLine(1,0.9382,6,0.9382);
+//cout << meantot/6 << "= PEAK POSITION";
+line_l->Draw();
+line_l->SetLineColor(1);
+line_l->SetLineWidth(3);
+leg = new TLegend(0.3,0.32,0.98,0.5);
+leg->AddEntry(gr2,"after momentum correction","p");
+leg->AddEntry(gr3,"befor momentum correction","p");
+leg->SetTextSize(0.05);
+leg->Draw();
+gr2->GetXaxis()->SetTitle("sector");
+gr2->GetXaxis()->SetLabelSize(0.05);
+gr2->GetYaxis()->SetLabelSize(0.03);
+gr2->GetYaxis()->SetNdivisions(5);
+gr2->SetTitle("Quasi-elastic peak position vs sector");
+gr2->GetYaxis()->SetTitle("Quasi-elastic peak position , GeV");
+
+c1->SaveAs("elast_before_corr.pdf");
+c->SaveAs("elast_after_corr.pdf");
+c3->SaveAs("elast_pic_position.pdf");
+
+};

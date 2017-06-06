@@ -1,0 +1,196 @@
+float fida(double *x, double *par) {
+   double s;
+   double th_min;
+     th_min=(11.+8./(0.472*par[0]+0.117));
+     double par1,par2;
+      par1=0.705+1.1*par[0];
+     par2=-63.2-33.3*par[0]; 
+     s = 30.5*pow((sin((x[0]-th_min)*0.01745)),(par1+par2/x[0]+1530./x[0]/x[0]))-1.;
+     if ((!(s>0))&&(!(s<0)))s=0;
+   return s;
+}
+
+float fidb(double *x, double *par) {
+   double s;
+   double th_min;
+     th_min=(11.+8./(0.472*par[0]+0.117));
+     double par1,par2;
+      par1=0.705+1.1*par[0];
+     par2=-63.2-33.3*par[0]; 
+     s = -30.5*pow((sin((x[0]-th_min)*0.01745)),(par1+par2/x[0]+1530./x[0]/x[0]))+1.;
+     if ((!(s>0))&&(!(s<0)))s=0;
+   return s;
+}
+
+
+
+void pim_fid_2dim() {
+
+
+
+
+gStyle ->SetOptLogz(1);
+gStyle->SetOptStat(0);
+gStyle->SetTitleSize(0.1,"t");
+gStyle->SetStatY(1.);                
+gStyle->SetStatX(0.9);                
+gStyle->SetStatW(0.26);                
+gStyle->SetStatH(0.11);
+gStyle->SetStatFontSize(0.15);
+//TFile *MyFile = new TFile("../../event_selection/b_vs_p/test3.root","READ");
+TFile *MyFile = new TFile("test_proton_fiduch.root","READ");
+//TCanvas *c1 = new TCanvas("Y vs X", "Y vs X", 1000, 800);
+//c1->Divide(2,3);
+
+
+
+UInt_t Number = 5;
+  Double_t Red[Number];
+  Double_t Green[Number];
+  Double_t Blue[Number];
+  Double_t Stops[Number];
+
+  double dcol = 1/double(Number);
+  double grey = 1;
+  
+    for (int j = 0; j < Number; j++){  
+
+    // ...... Define color with RGB equal to : gray, gray, gray .......
+
+    Stops[j]=double(j)/double(Number-1);
+    Red[j]=grey;
+    Blue[j]=grey;
+    Green[j]=grey;
+
+    grey = grey - dcol;
+  }
+
+  Int_t nb=100;
+
+  TColor::CreateGradientColorTable(Number,Stops,Red,Green,Blue,nb);
+
+
+
+int ii, j;
+TCanvas *c_arr[10];
+ostringstream qqq2;
+ostringstream qqq3;
+ostringstream qqq4;
+double p;
+
+for (j=2; j<3; j++){
+qqq2.str("");
+qqq2 << "c_arr" << j+1;
+c_arr[j] = new TCanvas (qqq2.str().c_str(),qqq2.str().c_str(),0,0,500,300);
+//c_arr[j]->Divide(2,3,0,0);//0.048,0.
+  
+
+ 
+ for (ii=1; ii<2; ii++) {
+c_arr[j]->SetBottomMargin(0.25);
+c_arr[j]->SetTopMargin(0.17);
+c_arr[j]->SetLeftMargin(0.13);
+c_arr[j]->SetRightMargin(0.14);
+c_arr[j]->cd();
+
+
+TH2D *fr = new TH2D("fr","", 1000,20.,70.,1000,-30.,30.); 
+fr->GetYaxis()->SetLabelSize(0.1);
+fr->GetZaxis()->SetLabelSize(0.1);
+fr->GetYaxis()->SetNdivisions(4);
+fr->GetXaxis()->SetNdivisions(6);
+fr->GetXaxis()->SetLabelSize(0.1);
+fr->GetXaxis()->SetTitle("#theta_{#pi^{-}} (deg)");
+fr->GetYaxis()->SetTitle("#varphi_{#pi^{-}} (deg)");
+fr->GetYaxis()->SetTitleOffset(0.4);
+fr->GetZaxis()->SetLabelOffset(-0.005);
+fr->GetXaxis()->SetTitleOffset(0.7);
+fr->GetXaxis()->SetTitleSize(0.14);
+fr->GetYaxis()->SetTitleSize(0.14);
+fr->SetMinimum(1.);
+fr->SetMaximum(10.);
+qqq3.str("");
+qqq3 << 200*j << " < P_{#pi^{-}}< " << 200*(j+1) << " MeV";
+fr->SetTitle(qqq3.str().c_str());
+/* 
+TPad *null=new TPad("null", "null", 0, 0, 1, 1);
+null->SetFillStyle(0);
+null->SetFrameFillStyle(0);
+null->Draw();
+null->cd();
+*/
+fr->Draw("cont3");
+
+
+std::string histName;
+std::stringstream out;
+out << "sector" << ii << "_pim_fid" << "/ph_vs_th_pim[" << ii << "][" << j+1 << "]";
+
+histName = out.str();
+cout << histName << "\n";
+TH2F *h1 = (TH2F*)MyFile->Get(histName.c_str());
+gStyle->SetTitleFont(32);
+h1->SetMinimum(1.);
+h1->SetMaximum(10.);
+h1->SetAxisRange(20., 70.1,"X");
+//h1->GetXaxis()->SetLimits(20,70.);
+ TCutG *cutg = new TCutG("cutg",5);
+   cutg->SetPoint(0,20,-29);
+   cutg->SetPoint(1,69.7,-29);
+   cutg->SetPoint(2,69.7, 29);
+   cutg->SetPoint(3,20, 29);
+   cutg->SetPoint(4,20,-29);
+h1->Draw("colz [cutg] same"); 
+h1->GetYaxis()->SetLabelSize(0.1);
+h1->GetZaxis()->SetLabelSize(0.1);
+h1->GetYaxis()->SetNdivisions(4);
+h1->GetXaxis()->SetLabelSize(0.1);
+h1->GetXaxis()->SetTitle("#theta (deg)");
+h1->GetYaxis()->SetTitle("#varphi (deg)");
+h1->GetYaxis()->SetTitleOffset(0.4);
+h1->GetZaxis()->SetLabelOffset(-0.005);
+h1->GetXaxis()->SetTitleOffset(0.7);
+h1->GetXaxis()->SetTitleSize(0.15);
+//h1->SetAxisRange(20., 70.,"X");
+h1->GetYaxis()->SetTitleSize(0.15);
+qqq3.str("");
+qqq3 << 200*j << " < P_{#pi^{-}}< " << 200*(j+1) << " MeV";
+Float_t p,th_min;
+h1->SetTitle(qqq3.str().c_str());
+p = 0.2*(j+1) - 0.1;
+th_min=(10.6+8./(0.472*p+0.117));
+ TF1 *f1 = new TF1("f1",fida,th_min,70.,2);
+ f1->SetParameter(0,p);
+// f1->SetParameter(1,1.);
+  f1->SetLineColor(kBlack);
+  f1->SetLineWidth(3);
+   f1->Draw("same");
+   
+ TF1 *f2 = new TF1("f2",fidb,th_min,70.,2);
+ f2->SetParameter(0,p);
+// f2->SetParameter(1,-1.); 
+ f2->SetLineColor(kBlack);
+ f2->SetLineWidth(3);
+
+  f2->Draw("same");
+      
+TLine *line_l = new TLine(th_min+0.6,f2->Eval(th_min+0.5),th_min+0.6,f1->Eval(th_min+0.5));
+line_l->SetLineColor(kBlack);
+line_l->SetLineWidth(3);
+//line_l->Draw("same");
+
+TLine *line_r = new TLine(50,-30,50,30);
+line_r->SetLineColor(kBlack);
+line_r->SetLineWidth(2);
+//line_r->Draw("same");
+ 
+};
+gPad->RedrawAxis("G");
+gPad->RedrawAxis();
+gPad->Modified();
+gPad->Update();
+c_arr[j]->SaveAs("pim.pdf");
+
+}; 
+};
+

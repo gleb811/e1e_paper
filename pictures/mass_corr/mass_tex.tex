@@ -1,0 +1,40 @@
+\documentclass[12pt,bezier,amstex]{minimal}
+%\usepackage[paperwidth=14in,paperheight=14in,margin=2in,showframe]{geometry}
+\paperwidth=1230bp%2in = 2x72bp = 144bp
+\paperheight=650bp%1.5in = 1.5x72bp = 108bp
+\voffset=-15bp
+\hoffset=-50bp
+\special{papersize=600bp,300bp}
+\usepackage{lipsum}
+ % include bezier curves
+\renewcommand\baselinestretch{1.0}           % single space
+\pagestyle{empty}                            % no headers and page numbers
+\oddsidemargin -10 true pt      % Left margin on odd-numbered pages.
+\evensidemargin 10 true pt      % Left margin on even-numbered pages.
+\marginparwidth 0.75 true in    % Width of marginal notes.
+\oddsidemargin  0 true in       % Note that \oddsidemargin=\evensidemargin
+\evensidemargin 0 true in
+\topmargin -0.75 true in        % Nominal distance from top of page to top of
+\textheight 9.5 true in         % Height of text (including footnotes and figures)
+\textwidth 6.375 true in        % Width of text line.
+\parindent=0pt                  % Do not indent paragraphs
+\parskip=0.15 true in
+\usepackage{graphicx}
+\usepackage{color}		% Need the color package
+\usepackage{epsfig}
+
+
+
+\begin{document} 
+    
+%\begin{figure}[htbp]
+%\begin{center}
+
+\scalebox{1.2}{ \input{mass_corr.pspdftex}}
+
+%\caption{}
+%\label{figure:example}
+%\end{center}
+%\end{figure}
+
+\end{document}

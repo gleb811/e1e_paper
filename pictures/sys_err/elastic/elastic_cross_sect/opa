@@ -1,0 +1,18 @@
+1 // flag 1-data; 2-simulation
+2.039 // beam energy in GeV
+6 // number of input files
+../cooked_root/out_100.root
+../cooked_root/out_101.root
+../cooked_root/out_102.root
+../cooked_root/out_103.root
+../cooked_root/out_104.root
+../cooked_root/out_105.root
+6 // number of input files for Monte Carlo
+../cooked_root/sim_nodcstat/out_sim_30.root
+../cooked_root/sim_nodcstat/out_sim_31.root
+../cooked_root/sim_nodcstat/out_sim_32.root
+../cooked_root/sim_nodcstat/out_sim_33.root
+../cooked_root/sim_nodcstat/out_sim_34.root
+../cooked_root/sim_nodcstat/out_sim_35.root
+out_new.root // output file
+
