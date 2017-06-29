@@ -32,7 +32,7 @@ UInt_t Number = 5;
     grey = grey - dcol;
   }
 
-  Int_t nb=100;
+  Int_t nb=40;
 
   TColor::CreateGradientColorTable(Number,Stops,Red,Green,Blue,nb);
 
@@ -45,15 +45,18 @@ h_eff_err->SetTitle("");
 c->cd()->SetRightMargin(0.12);
 c->cd()->SetBottomMargin(0.12);
 c->cd()->SetTopMargin(0.01);
-c->cd()->SetLogz();
+//c->cd()->SetLogz();
 
-h_eff_err->GetXaxis()->SetTitle("efficiency");
+h_eff_err->GetZaxis()->SetNdivisions(-510);
+
+
+h_eff_err->GetXaxis()->SetTitle("F");
 h_eff_err->GetXaxis()->SetTitleSize(0.05);
 h_eff_err->GetXaxis()->SetTitleOffset(0.8);
-h_eff_err->GetYaxis()->SetTitle("relative efficiency error");
+h_eff_err->GetYaxis()->SetTitle("#delta F/F");
 h_eff_err->GetYaxis()->SetTitleOffset(0.8);
 h_eff_err->GetYaxis()->SetTitleSize(0.05);
-h_eff_err->SetMaximum(50);
+h_eff_err->SetMaximum(40);
 
 h_eff_err->Draw("colz");
 
@@ -62,6 +65,9 @@ TPaletteAxis *palette = (TPaletteAxis*)h_eff_err->GetListOfFunctions()->FindObje
    palette->SetX2NDC(0.94);
    palette->SetY1NDC(0.12);
    palette->SetY2NDC(0.99);
+   
+   
+
 
 TLine *line1 = new TLine(0.001,0.3,0.2,0.3);
 line1->SetLineColor(1);

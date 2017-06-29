@@ -471,6 +471,8 @@ The former were taken into account according to inclusive approach~\cite{Mo:1968
 The main source of the exclusive background was found to be the reaction $e p \rightarrow e' p' \pi^{+} \pi^{-} \pi^{0}$. The events for that reaction were combined with the double-pion events 
 considering the ratio of three-pion/double-pion cross sections
  taken from~\cite{Wu:2005wf}. The simulation of double-pion events was carried out based on the JM05 version of double-pion production model~\cite{Ripani:2000va,Aznauryan:2005tp,Mokeev:2005re}, while for the $3\pi$ events a phase space distribution was assumed. 
+ 
+For the purpose of the cross section calculation experimental events from all four topologies were summed up together in each multi dimentional bin. With respect to the simulation,  reconstructed Monte Carlo events were also subject to the summation.
 
 %The $3\pi$ background can be barely seen as a separate peak on the right side of the missing mass squared distributions for the exclusive topology in last two $W$ bins (see Fig.~\ref{fig:excl_miss_mass} bottom row). For the other topologies the $3\pi$ background can not be seen as a separate peak and it manifests itself as a contribution to the tail on the right side of the missing mass squared distributions.
 
@@ -500,12 +502,12 @@ considering the ratio of three-pion/double-pion cross sections
 
 
 
-\begin{figure*}[htp]
-\begin{center}
-\frame{\includegraphics[width=0.95\textwidth]{pictures/miss_en/miss_en.pdf}}
-\caption{\small   Missing energy distributions for various topologies. Left plot corresponds to the topology where all final hadrons are registered and other plots correspond to the topologies with missing $\pi^-$, $\pi^+$, or proton, respectively. Vertecal lines show the applied cut. All events on the right side of the lines are selected as good for analysis.\label{fig:miss_en}}
-\end{center}
-\end{figure*}
+%\begin{figure*}[htp]
+%\begin{center}
+%\frame{\includegraphics[width=0.95\textwidth]{pictures/miss_en/miss_en.pdf}}
+%\caption{\small   Missing energy distributions for various topologies. Left plot corresponds to the topology where all final hadrons are registered and other plots correspond to the topologies with missing $\pi^-$, $\pi^+$, or proton, respectively. Vertecal lines show the applied cut. All events on the right side of the lines are selected as good for analysis.\label{fig:miss_en}}
+%\end{center}
+%\end{figure*}
 
 
 
@@ -541,7 +543,7 @@ variables is used~\cite{Fed_an_note:2017,Byckling:1971vca}.
 hadrons $M_{h_{1}h_{2}}$;
 \item invariant mass of the second pair of the
 hadrons $M_{h_{2}h_{3}}$;
-\item the first hadron solid angle $\Omega = (\theta_{h_{1}}, \varphi_{h_{1}})$;
+\item the first hadron solid angle $\Omega_{h_{1}} = (\theta_{h_{1}}, \varphi_{h_{1}})$;
 \item the angle $\alpha_{h_{1}}$ between two planes: one of
 them is defined by the three-momenta of
 the virtual photon (or initial proton) and the first final hadron, the second
@@ -582,20 +584,19 @@ The white boundary limits the kinematical area, where the double-pion cross sect
 \end{center}
 \end{figure} 
 
-The binning in the final hadron variables is listed in Tab.~\ref{tab:summary_bins}. It is chosen to maintain the resonable statistical uncertanties in all $W$ and $Q^{2}$ bins. The binning choice also takes into account the fact that the cross section decreases as $W$ goes to the double-pion production threshold at $\approx 1.22$~GeV. 
+The binning in the final hadron variables is listed in Tab.~\ref{tab:summary_bins}. It is chosen to maintain the resonable statistical uncertanties in all $W$ and $Q^{2}$ bins. The binning choice also takes into account the cross section drop near the double-pion production threshold at $\approx 1.22$~GeV as well as the broadening of the reaction phase space with increase of $W$. 
 
-
-
-It also needs to be mentioned that the right boundary of the invariant mass distributions depends on the value of $W$, while the left does not (see Eq.~\ref{eq:inv_mass_boundary}). 
+The binning in invariant masses requires a special attention.
+As it is shown in Eq.~\ref{eq:inv_mass_boundary} the left boundary of the invariant mass distributions is fixed, while the right one grows with $W$. 
 \begin{equation}
 \begin{aligned}
-M_{left} = m_{h_1} + m_{h_2} \\
-M_{right} = W - m_{h_3}, \label{eq:inv_mass_boundary}
+M_{left} & = m_{h1} + m_{h_2} \\
+M_{right} & = W_{center} - m_{h_3}, \label{eq:inv_mass_boundary}
 \end{aligned}  
 \end{equation}
-where $M_{left}$ and $M_{right}$ are the left and right boundaries of  the invariant mass distribution. $m_{h_1}$, $m_{h_2}$, and $m_{h_3}$ are the masses of final hadrons. The value of $W$ is taken in the center of the corresponding $W$ bin.
+where $M_{left}$ and $M_{right}$ are the left and right boundaries of  the invariant mass distribution. $m_{h_1}$, $m_{h_2}$, and $m_{h_3}$ are the masses of the final hadrons. The value of $W_{center}$ is taken at the center of the corresponding bin $W_{left} < W < W_{right}$ , since the exctracted cross section is assumed to be assigned to the center of a bin.
 
-It leads to the fact that invariant mass distributions are broader at high $W$ and hence a more detailed binning in that area is necessary (see Tab.~\ref{tab:summary_bins}).
+%It leads to the fact that invariant mass distributions are broader at high $W$ and hence a more detailed binning in that area is necessary (see Tab.~\ref{tab:summary_bins}).
 
 \begingroup
 \squeezetable
@@ -620,33 +621,38 @@ It leads to the fact that invariant mass distributions are broader at high $W$ a
 
 \begin{figure}[htp]
 \begin{center}
-\frame{\includegraphics[width=9cm]{pictures/mass_corr/mass_tex.pdf}}
+\frame{\includegraphics[width=8cm]{pictures/mass_corr/mass_tex.pdf}}
 \caption{\small Schematic representation of the cross sections in the next to last bin in the invariant mass $(M_{X_{1}X_{2}})$ for various $W$. Dot-dashed and dashed vertical lines show  maximal invariant mass values that can be reached with $W_{left}$ and $W_{right}$, respectively, while vertical black  lines show the boundaries of the next to last bin in the invariant mass.  \label{fig:mass_corr}}
 \end{center}
 \end{figure}
 
-Since $M_{right}$  is calculated using the value of $W$ in the center of the corresponding $W$ bin some events are located beyond the boundaries determined by Eq.~\ref{eq:inv_mass_boundary}. Therefore the binning in invariant mass needs special attention.
-Firstly the bin width is determined as:
+All events from the range $W_{left} < W < W_{right}$ contribute to the invariant mass distributions. Since
+the right boundary of these distributions  is calculated using $W_{center}$ some events turned out to be located beyond $M_{right}$. 
+Hence it was decided to use the following specific arrangment of bins.
+ Firstly the bin width $\Delta M$ is determined as:
 \begin{equation}
 \begin{aligned}
-width = \frac{M_{right}-M_{left}}{N_{bins}-1}, \label{eq:bin_width}
+\Delta M = \frac{M_{right}-M_{left}}{N_{bins}-1}, \label{eq:bin_width}
 \end{aligned}  
 \end{equation} 
-where $N_{bins}$ is the number of bins. 
+where $N_{bins}$ is the number of the bins specified in Tab.~\ref{tab:summary_bins}. 
 
-Then the invariant mass distributions are obtained with the number of bins $N_{bins}$ and the left boundary of the first bin is set to $M_{left}$. That makes the last bin to be situated completely out of the boundaries given by Eq.~\ref{eq:inv_mass_boundary}. Although the cross section obtained in this bin is very small, it is kept in analysis since its content contributes to all other cross sections obtained by integration over the corresponding invariant mass. 
+Then the invariant mass distributions are obtained within the limits from $M_{left}$ to $M_{right}+\Delta M$ causing the last bin to be situated completely out of the boundaries given by Eq.~\ref{eq:inv_mass_boundary}. Although the cross section obtained in this bin is very small, this bin is however kept since its content contributes to all other cross sections obtained by integration over the corresponding invariant mass. 
 After the binning corrections this effect is assumed to be taken into account and this last bin in invariant masses is neglected. 
 
-It needs to be mentioned that the next to last bin in each invariant mass also needs special attention. Since the cross sections are obtained in $W$ bin, the right boundaries of the invariant mass distributions vary for different events within this bin. In Fig.~\ref{fig:mass_corr} the distribution of the invariant mass of the two final hadrons $X_{1}$ and $X_{2}$ is schematically illustrated for the bin in $W$ from $W_{left}$ to $W_{right}$. 
-The green and red vertical dashed lines show  maximal invariant mass values that can be reached with $W_{left}$ and $W_{right}$, respectively, while the vertical black dashed lines show the boundaries of the next to last bin in the invariant mass.
-As it is seen in Fig.~\ref{fig:mass_corr} events in this bin with $W$ between $W_{left}$ and $M_{right}^{N_{bins}-1} = W_{center} - m_{X_{3}}$ are distributed in the range in $M_{X_{1}X_{2}}$, which is less than invariant mass bin width defined by Eq.~\ref{eq:bin_width}.
+The cross section in the next to last bin should be treated carefully.
+In Fig.~\ref{fig:mass_corr} the distributions of the invariant mass $M_{h_{1}h_{2}}$ are schematically illustrated for three values of $W$, i.e. $W_{left}$ -- dot-dashed curve, $W_{center}$ -- solid curve, and $W_{right}$ -- dashed curve. 
+The dot-dashed and dashed vertical lines show  maximal invariant mass values that can be reached with $W_{left}$ and $W_{right}$, respectively, while the vertical black solid lines show the boundaries of the next to last bin in the invariant mass.
+The invariant mass distributions for $W$ from $W_{left}$ to $ W_{center}$  have the right edges within this bin.
+As a consequence events that contribute to the next to last bin are distributed in the range, which is less than invariant mass bin width $\Delta M$ defined by Eq.~\ref{eq:bin_width}. Since on a level of cross section extraction the bin width $\Delta M$ given by Eq.~\ref{eq:bin_width} is always used this effect leads to the cross section underestimation.
 
-Correction for this effect is made using the new double pion event generator~\cite{Skorodum:EG}. For that purpose for each invariant mass two  one-dimensional distributions are generated in each $W$ bin. The first one mimics the data distribution, for which all events in the next to last bin are divided by the same bin width defined by Eq.~\ref{eq:bin_width}.  For the second one events with $W$ between $W_{center}$ and $W_{right}$ are divided by the same bin width defined by Eq.~\ref{eq:bin_width}, while events with $W$ between $W_{left}$ and $W_{center}$ are divided by the bin width that is individual for each event and equal to $W - m_{X_{3}} - M_{left}^{N_{bins}-1}$. The correction factor, by which obtained single-differential cross sections in the next to last bin should be multiplied, is defined as the ratio of the second distribution over the first one. This factor typically varies from 5\% to 10\%. 
+
+
+The correction for this effect is made using TWOPEG double pion event generator~\cite{Skorodum:EG}. For that purpose for each invariant mass two  one-dimensional distributions are generated in each $W$ bin. The first one mimics the data distribution, for which all events in the next to last bin are divided by the same bin width $\Delta M$.  For the second one events with $W$ between $W_{center}$ and $W_{right}$ are divided by $\Delta M$, while events with $W$ between $W_{left}$ and $W_{center}$ are divided by the bin width that is individual for each event and equal to $W - m_{h_{3}} - M_{left}^{N_{bins}-1}$, where $M_{left}^{N_{bins}-1}$ is the left boundary of the nex to last bin (see left solid vertical line in Fig.~\ref{fig:mass_corr}). The correction factor, by which obtained single-differential cross sections in the next to last bin should be multiplied, is defined as the ratio of the second distribution over the first one. This factor provides the correction to the cross section in the nex two last bin that varies from 5\% to 10\%. 
 
 
 
-Q2 vs W plot + table with binning.
-Mass border points corrections.
+
 
 
 
@@ -669,33 +675,114 @@ Mass border points corrections.
 
 
 \subsection{Cross section formula}
+\label{cr_sect_formula}
 
 
-So
-electron scattering cross section for double-pion electroproduction should be
-seven-differential: five variables for the final
-hadrons plus $W$ and $Q^{2}$ that are determined by the
-scattered electron kinematics. Such
-seven-differential cross sections may be
-written as
-$\frac{d^{7}\sigma}{dWdQ^{2}d^{5}\tau}$,
-where $d^{5}\tau$ is five-dimensional phase space differential.
+In the single photon exchange approximation the virtual photoproduction cross section $\sigma_{v}$ is connected with the experimental electron scattering cross section $\sigma_{e}$ via Eq.~\eqref{fulldiff}. 
+
+\begin{equation}
+\begin{aligned}
+\frac{d^{5}\sigma_{v}}{d^{5}\tau} & = \frac{1}{\Gamma_{v}}
+\frac{d^{7}\sigma_{e}}{dWdQ^{2}d^{5}\tau}; \\
+d^{5}\tau & = dM_{h_{1}h_{2}}dM_{h_{2}h_{3}}d\Omega_{h_{1}}
+d\alpha_{h_{1}} \textrm{ ,}
+\label{fulldiff}
+\end {aligned}
+\end{equation}
+where $d^{5}\tau$ is the differential of the five independent variables of the final $\pi^{+}\pi^{-}p$, which were described in Sec.~\ref{sec_kin_var}, $\Gamma_{v}$ is the 
+virtual photon flux, given by
+
+\begin{equation}
+\Gamma_{v}(W,Q^{2}) =
+\frac{\alpha}{4\pi}\frac{1}{E_{beam}^{2}m_{p}^{2}}\frac{W(W^{2}-m_{p}^{2})}
+{(1-\varepsilon_{T})Q^{2}} \textrm{ ,}
+\label{flux}
+\end{equation}
+where $\alpha$ is the fine structure constant $\left(1/137\right)$, $m_{p}$ is the proton
+mass, $E_{beam} = 2.039$~GeV is the energy of the incoming electron beam, and $\varepsilon_{T}$ is the virtual photon transverse polarization, given by
+
+\begin{equation}
+\varepsilon_{T} = \left( 1 + 2\left( 1 +
+\frac{\nu^{2}}{Q^{2}} \right)
+tan^{2}\left(\frac{\theta_{e'}}{2}\right) \right)^{-1} \textrm{ ,}
+\label{polarization}
+\end{equation}
+where $\nu = E_{beam} - E_{e'}$ is the virtual photon energy, while $E_{e'}$ and
+$\theta_{e'}$ are the energy and the polar angle of the scattered electron in the
+lab frame, respectively. 
+%$W$, $Q^{2}$ and $\theta_{e'}$ are
+%taken in the center of the bin.
+
+The experimentalelectron scattering cross section $\sigma_{e}$ introduced in Eq.~\eqref{fulldiff} in turn can be calculated as
+  
+ 
+\begin{equation}
+\frac{d^{7}\sigma_{e}}{dWdQ^{2}d^{5}\tau} = \frac{1}{F \cdot R} 
+\frac{\left( \frac{\Delta N_{full}}{Q_{full}}-\frac{\Delta N_{empty}}{Q_{empty}} \right)}{
+\Delta W \Delta Q^{2} \Delta^{5} \tau \left( \frac{l \rho N_{A}}{q_{e}M_{H}} \right)} \textrm{ ,}
+\label{expcrossect}
+\end{equation}
+where $\Delta N_{full}$ and $\Delta N_{empty}$ are the numbers of selected double-pion events inside the
+seven-dimensional bin for runs with hydrogen and
+empty target, respectively. 
+Each event is weighted with the corresponding photoelectron correction factor given by Eq.~\ref{eq:cc_corr_fact}.
+ $F = F(\Delta W, \Delta Q^{2}, \Delta \tau)$ is the detector efficiency for the seven-dimensional bin
+ coming from the  Monte Carlo simulation,
+$R = R(\Delta W, \Delta Q^{2})$ is the
+radiative correction factor described in Sec.~\ref{rad_corr},  $Q_{full}= 5999.64$~$\mu$C and $Q_{empty} = 334.603$~$\mu$C are the  values of the charge accumulated on the Faraday cup for runs with hydrogen and empty target, respectively. $q_{e} =1.610^{-19}$ C is the elementary charge, $\rho = 0.0708$  g/cm$^{3}$ is the density of liquid hydrogen at $T = 20$~K,
+$l = 2$ cm is the length of the target, $M_{H} = 1.00794$ g/mol is the molar density of
+the natural mixture of hydrogen,  $N_{A} =6.0210^{23}$ mol$^{-1}$ is Avogadro's
+number.
+
+%Infinitesimal differentials in the left hand side of Eq.~\ref{expcrossect} 
+The electron scattering cross section in the left hand side of Eq.~\ref{expcrossect} is assumed to be obtained in the center of the finite seven-dimentional kinematical bin $\Delta W \Delta Q^{2} \Delta^{5} \tau$.
 
 
-\subsection{Radiative correction}
 
-\begin{figure}[htp]
-\begin{center}
-\includegraphics[width=8cm]{pictures/rad_corr/rad_corr_avrg.pdf}
-\caption{\small One over radiative correction factor (see formula~\ref{expcrossect})
-as function of $W$ averaged over all  $Q^{2}$ bins.} \label{radcorrfact}
-\end{center}
-\end{figure}
+
+
+The limited
+statistics of the experiment does not allow to estimate
+the five-differential cross section $\sigma_{v}$ with the reasonable
+accuracy. Therefore being obtained on the multi-dimentional grid, the cross section $\sigma_{v}$ is futher integrated over all hadron variables except of one. Hence only the sets of the single-differential and fully integrated cross sections are presented as a result here.
+
+For each bin in $W$ and $Q^2$ the following cross sections are obtained
+\begin{equation}
+\begin{aligned}
+\frac{d\sigma}{dM_{h_{1}h_{2}}} & =
+\int\frac{d^{5}\sigma}{d^{5}\tau}dM_{h_{2}h_{3}}d\Omega_{h_{1}}d\alpha_{h_{1}};  \\
+\frac{d\sigma}{dM_{h_{2}h_{3}}} & =
+\int\frac{d^{5}\sigma}{d^{5}\tau}dM_{h_{1}h_{2}}d\Omega_{h_{1}}d\alpha_{h_{1}}; \\
+\frac{d\sigma}{d(-cos\theta_{h_{1}})} & =
+\int\frac{d^{5}\sigma}{d^{5}\tau}dM_{h_{1}h_{2}}dM_{h_{2}h_{3}}d\varphi_{h_{1}}d\alpha_{h_{1}};  \\
+\frac{d\sigma}{\alpha_{h_{1}}} & =
+\int\frac{d^{5}\sigma}{d^{5}\tau} dM_{h_{1}h_{2}}dM_{h_{2}h_{3}}d\Omega_{h_{1}}; \\
+\sigma_{int}(W,Q^{2}) & =
+\int\frac{d^{5}\sigma}{d^{5}\tau}dM_{h_{1}h_{2}}dM_{h_{2}h_{3}}d\Omega_{h_{1}}d\alpha_{h_{1}}.
+\end{aligned}
+\label{inegr5diff}
+\end{equation}
+
+Since the cross sections are obtained on the
+five-dimensional kinematical grid,
+integrals in~(\ref{inegr5diff}) are calculated numerically 
+on that grid. 
+
+%For other sets of kinematical variables single-fold differentional cross sections were determined in the same way.
+
+
+
+
+
 
 
 \subsection{Efficiency evaluation}
+\label{eff_err}
 
-The simulation is carried out with the JM05 version of double-pion production model~\cite{Ripani:2000va,Aznauryan:2005tp,Mokeev:2005re}.
+For the Monte Carlo simulation the GENEV event generator developed by 
+Genova group was used. This event generator uses the JM05 model~\cite{JM05} for the investigated double-pion channel,
+while for the background channel $e p \rightarrow e'p'\pi^{+}\pi^{-}\pi^{0}$, which was generated along with the main one, GENEV assumes the phase space distributions for all kinematical variables.
+
 
 
 \begin{figure}[htp]
@@ -705,16 +792,181 @@ The simulation is carried out with the JM05 version of double-pion production mo
 \end{center}
 \end{figure}
 
+The generated events were passed through the GEANT based detector siumulation and reconstruction procedures. Then the efficiency factor $F$ from Eq.~\eqref{expcrossect} is calculated in each $\Delta W\Delta Q^{2}\Delta^{5} \tau$ bin as:
+\begin{equation}
+F(\Delta W, \Delta Q^{2}, \Delta^{5} \tau) = \frac{N_{rec}}{N_{gen}},
+\label{efficiency}
+\end{equation}
+where $N_{gen}$ is the number of generated double-pion events inside the multi-dimensional bin, while $N_{rec}$ is the number of reconstructed either double- and three-pion events survived in that bin after the event selection. This definition of the efficiency factor $F$ allows to account for the three-pion background that is negligible at $W < 1.6$ GeV  and
+grows up to a few percent at $W \approx 1.8$ GeV. 
+
 \begin{figure*}[htp]
 \begin{center}
 \frame{\includegraphics[width=13cm,keepaspectratio]{pictures/topologies/cr_sec_all_top.pdf}}
-\caption{\small  Triangles are for the cross sections with unfilled empty cells and the circles are for the cross sections with filled empty cells. Curves show the cross sections that are used for the purpose of filling empty cells. All distributions are given for one particular bin in $W$ and $Q^2$ ($W = 1.6375$~GeV, $Q^2 = 0.525$~GeV$^2$).} \label{fig:topologies}
+\caption{\small  
+The extracted single-differential cross sections  for the two cases: when the contribution from empty cells is ignored (empty squares) and when that is taken into account (black circles).
+Curves show the TWOPEG cross sections that were used as a model assumption for the empty cell contribution. All distributions are given for one particular bin in $W$ and $Q^2$ ($W = 1.6375$~GeV, $Q^2 = 0.525$~GeV$^2$).} \label{fig:topologies}
 \end{center}
 \end{figure*}
 
-Include how empty cells were filled out + combinations of various topologies. 1D plots with comparison of the cross section with and without empty cells filled out. Describe efficiency error cut.
+%Include how empty cells were filled out + combinations of various topologies. 1D plots with comparison of the cross section with and without empty cells filled out. Describe efficiency error cut.
 
-\subsection{Systematic errors}
+%It needs to be mentioned that kinematical cells where $N_{rec} >= N_{gen}$ are treated as empty cells with no efficiency. Such cells are very rare and usually located near the edges of the invariant mass distributions where the cross section is close to zero.
+
+
+
+
+Due to the blind areas in the geometrical coverage of the CLAS detector, some kinematical bins of the double-pion production phase space turned out to have zero acceptance. 
+In such bins, which are usually called empty cells,  the cross section can not be experimentally defined. The empty cells contribute to the integrals in~\eqref{inegr5diff} along with other kinematical bins.  Ignoring the contribution from empty cells leads to the systematical cross section underestimation and therefore some model assumtions for the cross section in these cells are needed. 
+
+A special procedure was developed in order to take into account the contrubutions from empty cells to the integrals~\eqref{inegr5diff}.
+As a first step of this procedure the map of the empty cells was determined using the Monte Carlo simulation. A cell is treated as empty, if it contains generated events ($N_{gen} > 0$), but does not contain any reconstructed events ($N_{rec} = 0$). 
+
+Beside that, the efficiency in some kinematical bins can not be reliably determined due to the boundary effects, bin to bin event migration, and limited Monte Carlo statistics.  
+These cells were excluded from the consideration and also treated as the empty cells.
+In order to determine the criterion for cell exclusion the distribution shown in Fig.~\ref{fig:eff_err} is produced.
+This figure shows the relative efficiency error $\frac{\delta F}{F}$ (absolute efficiency error $\delta F$ is defined in Sect.~\ref{stat_unc})  versus efficiency $F$, while the color code stands for the number of multi-dimensional cells. As it is seen in  Fig.~\ref{fig:eff_err} cells with relative efficiency errors greater than 30\% are clustered along the horizontal stripes. This effect  reveals the bins with small statistics of the generated events and originates from the fact that efficiency is obtained by division of two integer numbers. Moreover these horizontal stripes contain many non-trustable cells with extremely small efficiency. Therefore,  the multi-dimensional bins that are located above the horizontal  line in Fig.~\ref{fig:eff_err} are excluded from the analysis being treated as empty cells.
+
+
+
+Once the map of empty cells had been determined the cross section produced by the TWOPEG event  generator was used as a model assumption for these kinematical bins. 
+This event generator employs the double-pion cross sections from the recent version of the JM15 model fit to the data~\cite{Ripani:2002ss,Mokeev:2012vsa,Fedotov:2008aa,Golovach:note}) as well as the data~\cite{Wu:2005wf,ABBHHM:1968aa} itself and therefore provides the best cross section estimation up to now.
+The paper~\cite{Skorodum:EG} describes in details the approach used in TWOPEG in order to estimate the cross section value. 
+
+
+
+Fig.~\ref{fig:topologies} introduces the single-differential cross sections given by Eq.~\eqref{inegr5diff} extracted for three sets of the kinematical variables described in Sect.~\ref{sec_kin_var}.  The empty squares correspond to the case, when the contribution from empty cells is ignored, the  black circles are for the case, when that is taken into account in the way described above, while the black curves stand for the TWOPEG cross sections which were used as a model assumtion. The figure demonstrates reasonably small contribution from empty cells that was achieved using all four avaliable reaction topologies in combination. Only the edge points in $\theta$ distributions reveal pronounceable empty cell contributions  due to the complete absence of the CLAS acceptance in the corresponding directions. 
+To account for the possible descrepancies with the model, the part of the cross section that comes from the empty cells was assigned with 50\% relative error. Finally this additional error was combined with the total statistical one. 
+
+
+
+
+
+
+\subsection{Radiative correction}
+\label{rad_corr}
+
+
+The radiative correction to the extracted cross sections was performed using TWOPEG event generator for the double-pion electroproduction~\cite{Skorodum:EG} which accounts the radiative effects by means of the well-known approach~\cite{Mo:1968cg}. 
+This approach has successfully proven itself as an efficient tool to calculate inclusive radiative cross section from the non-radiative one.
+In~\cite{Mo:1968cg} the approach is applied to the inclusive case, while in TWOPEG double pion integral cross sections are used instead~\cite{Skorodum:EG}. The radiative photons are suposed to be emitted colliniarly either to the direction of the initial or scattered electron (so-called ``peaking approximation").
+
+In~\cite{Mo:1968cg,Skorodum:EG} the calculation of the radiative cross section is split into two parts. The ``soft" part assumes the energy of the  emitted radiative photon to be less than the certain minimal value (10 MeV), while the ``hard" part is for the photons with energy greater than that value. 
+The ``soft" part is evaluated
+explicitly, while for the calculation of the ``hard" part the inclusive hadronic
+tensor is assumed. 
+The latter assumption is however considered adequate, since the approaches
+that are capable at describing radiative processes
+in exclusive double-pion electroproduction, are not yet available.
+
+\begin{figure}[htp]
+\begin{center}
+\includegraphics[width=8cm]{pictures/rad_corr/rad_corr_avrg.pdf}
+\caption{\small One over radiative correction factor $R$ (see Eq.~\ref{expcrossect})
+as function of $W$ averaged over all considered $Q^{2}$ bins.} \label{radcorrfact}
+\end{center}
+\end{figure}
+
+
+The radiative
+correction factor $R$ in Eq.~(\ref{expcrossect})
+was determined in the following way.
+The double-pion events either with and without radiative effects were generated with TWOPEG, then the ratio given by Eq.~\eqref{radcorrfact} was taken in each $\Delta W \Delta Q^{2}$ bin. 
+\begin{equation}
+\label{radcorrfact}
+R(\Delta W,\Delta Q^{2}) = \frac{N_{rad}^{2D}}{N_{norad}^{2D}} \textrm{ ,}
+\end{equation}
+where $N_{rad}^{2D}$ and $N_{norad}^{2D}$ are the
+numbers of generated events in each $\Delta W \Delta Q^{2}$ bin
+with and without radiative effects, respectively.
+
+
+
+The used approach allows to obtain the correction factor $R$ only as a function of $W$ and $Q^{2}$ disregarding its dependence on the final hadron variables.
+However 
+the need to integrate the cross section at least over four final hadron variables (see Eq.~\eqref{inegr5diff}) considerably reduces the influence of
+the final hadron kinematics on the
+radiative correction factor thus even stronger justifying 
+the applicability of the procedure~\cite{Mo:1968cg,Skorodum:EG}.
+
+
+
+
+ The quantity one over $R$, which is averaged over all considered $Q^{2}$ bins, is plotted in  Fig.~\ref{radcorrfact} as a function of $W$. The dependence of this quantity on $Q^{2}$ was found to be negligible.  The uncertainties associated with the statistics of the generated events are very small and therefore  not seen in Fig.~\ref{radcorrfact}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Statistical uncertainties}
+\label{stat_unc}
+
+The limited statistics of either the experimental data and the Monte Carlo simulation  are two sources of the statistical fluctuations of the extracted cross sections.
+The cut on the efficiency error discribed in Sec.~\ref{eff_err} is chosen in a way that the latter source gives the minor contribution to the total statistical uncertainty .
+
+
+The absolute statistical  uncertainty to the five-differential
+virtual photoproduction cross section caused by the statistics of the experimental data can be written as
+ \begin{equation}
+\delta_{stat,exp}(\Delta^{5} \tau) = \frac{1}{F} \frac{1}{R}
+\frac{1}{ \Gamma_{v} }
+\frac{\sqrt{\left( \frac{\Delta
+N_{full}}{Q_{full}^{2}}+\frac{\Delta N_{empty}}{Q_{empty}^{2}} \right) } }{
+\Delta W \Delta Q^{2} \Delta^{5} \tau \left( \frac{l \rho N_{A}}{q_{e}M_{H}} \right)}.
+\label{staterrors}
+\end{equation}
+
+
+The absolute error to the cross section due to the limited Monte Carlo statistic is  in turn given by
+\begin{equation}
+\delta_{stat,MC} = \frac{d^{5}\sigma}{d^{5}\tau} \left( \frac{\delta F)}{F} \right),
+\label{montecarloerror}
+\end{equation}
+
+where $F$ is the efficiency inside the multi-dimetional bin defined by Eq.~\eqref{efficiency}, while $\delta F$ is its absolute statistical error. 
+
+
+
+Due to the fact that $N_{gen}$ and $N_{rec}$ in Eq.~\eqref{efficiency} are not independent the usual method of partial dirivatives is not applicable in order to calculate $\delta F$.
+Therefore the special approach described in~\cite{Laforge:1996ts} was used for this purpose.
+Neglecting the event migration between the bins, this approach gives the following expression for  
+ the absolute statistical error of the efficiency
+\begin{equation}
+\delta F =
+\sqrt{\frac{(N_{gen}-N_{rec})N_{rec}}{N_{gen}^{3}}}.
+\label{efferror}
+\end{equation}
+
+Finally two parts of the statistical uncertainty given by Eq.~\eqref{staterrors} and \eqref{montecarloerror} are combined quadratically into the total absolute statistical uncertainty to the cross section in the multi-demensional bin
+
+
+\begin{equation}
+\delta_{stat,tot} =
+\sqrt{\delta_{stat,exp}^{2} + \delta_{stat,MC}^{2}}.
+\label{errortot}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Systematical uncertainties}
 
 
 \begin{figure*}[htp]
@@ -729,12 +981,7 @@ Include how empty cells were filled out + combinations of various topologies. 1D
 
 Discription + ref to the plots from Section "Comparison with the model".
 
-\section{Comparison with the model}
-
-1D plot for one Q2 \& W bin + int plots with sys errors.
-
-\section{CONCLUSIONS}
-
+\section{Comparison with the model and previously avaliable data}
 
 \begin{figure*}[htp]
 \begin{center}
@@ -743,6 +990,12 @@ Discription + ref to the plots from Section "Comparison with the model".
 \label{fig:e1e_e1c}
 \end{center}
 \end{figure*}
+
+1D plot for one Q2 \& W bin + int plots with sys errors.
+
+\section{CONCLUSIONS}
+
+
 
 
 

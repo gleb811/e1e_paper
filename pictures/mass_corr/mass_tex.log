@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.1.8)  16 MAY 2017 18:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.1.8)  26 JUN 2017 17:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -133,77 +133,107 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-(./mass_corr.pspdftex <mass_corr_pspdftex.pdf, id=1, 940.51375pt x 529.98pt>
-File: mass_corr_pspdftex.pdf Graphic file (type pdf)
+(./mass_corr_new.pspdftex
+<mass_corr_new_pspdftex.pdf, id=1, 516.93124pt x 272.01625pt>
+File: mass_corr_new_pspdftex.pdf Graphic file (type pdf)
 
-<use mass_corr_pspdftex.pdf>
-Package pdftex.def Info: mass_corr_pspdftex.pdf used on input line 2.
-(pdftex.def)             Requested size: 940.51146pt x 529.97868pt.
+<use mass_corr_new_pspdftex.pdf>
+Package pdftex.def Info: mass_corr_new_pspdftex.pdf used on input line 2.
+(pdftex.def)             Requested size: 516.92998pt x 272.01558pt.
 
+
+LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <20> not available
+(Font)              size <20.74> substituted on input line 14.
+
+LaTeX Font Info:    Calculating math sizes for size <20> on input line 14.
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <20> not available
+(Font)              size <20.74> substituted on input line 14.
+
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <13.99994> not available
+(Font)              size <14.4> substituted on input line 14.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <20> not available
+(Font)              size <20.74> substituted on input line 14.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <13.99994> not available
+(Font)              size <14.4> substituted on input line 14.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <20> not available
+(Font)              size <20.74> substituted on input line 14.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <13.99994> not available
+(Font)              size <14.4> substituted on input line 14.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <20> on input line 14.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <13.99994> on input line 14.
 
 LaTeX Font Warning: Font shape `OT1/cmr/bx/n' in size <29> not available
-(Font)              size <24.88> substituted on input line 14.
+(Font)              size <24.88> substituted on input line 16.
 
-LaTeX Font Info:    Calculating math sizes for size <29> on input line 14.
+LaTeX Font Info:    Calculating math sizes for size <29> on input line 16.
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <29> not available
-(Font)              size <24.88> substituted on input line 14.
+(Font)              size <24.88> substituted on input line 16.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <20.29991> not available
-(Font)              size <20.74> substituted on input line 14.
+(Font)              size <20.74> substituted on input line 16.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <29> not available
-(Font)              size <24.88> substituted on input line 14.
+(Font)              size <24.88> substituted on input line 16.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <20.29991> not available
-(Font)              size <20.74> substituted on input line 14.
+(Font)              size <20.74> substituted on input line 16.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <29> not available
-(Font)              size <24.88> substituted on input line 14.
+(Font)              size <24.88> substituted on input line 16.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <20.29991> not available
-(Font)              size <20.74> substituted on input line 14.
+(Font)              size <20.74> substituted on input line 16.
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <29> on input line 14.
+(Font)              <29> on input line 16.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <20.29991> on input line 14.
+(Font)              <20.29991> on input line 16.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.5> on input line 14.
-)
-Overfull \hbox (671.67108pt too wide) in paragraph at lines 33--34
-[][] 
- []
-
-[1
+(Font)              <14.5> on input line 16.
+) [1
 Non-PDF special ignored!{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./
-mass_corr_pspdftex.pdf>] (./mass_tex.aux)
+mass_corr_new_pspdftex.pdf>] (./mass_tex.aux)
 
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 4.12pt have occurred.
 
  ) 
 Here is how much of TeX's memory you used:
- 1584 strings out of 494497
- 23118 string characters out of 6172401
+ 1595 strings out of 494497
+ 23329 string characters out of 6172401
  175195 words of memory out of 5000000
- 5005 multiletter control sequences out of 15000+600000
- 6688 words of font info for 24 fonts, out of 8000000 for 9000
+ 5016 multiletter control sequences out of 15000+600000
+ 6995 words of font info for 25 fonts, out of 8000000 for 9000
  264 hyphenation exceptions out of 8191
- 38i,12n,24p,264b,224s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on mass_tex.pdf (1 page, 40672 bytes).
+ 38i,12n,24p,264b,223s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on mass_tex.pdf (1 page, 46838 bytes).
 PDF statistics:
- 27 PDF objects out of 1000 (max. 8388607)
- 18 compressed objects within 1 object stream
+ 31 PDF objects out of 1000 (max. 8388607)
+ 21 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -58,7 +58,7 @@ UInt_t Number = 5;
 
 
 TCanvas *c_arr[6];
-TH2 *hist;
+TH2 *hist[6];
 Short_t i, j;
 ostringstream qqq;
 ostringstream qqq1;
@@ -75,7 +75,7 @@ qqq1 << "c_arr" << i+1;
 c_arr[i] = new TCanvas (qqq1.str().c_str(),qqq1.str().c_str(),0,0,500,300);
 c_arr[i]->Divide(2,3,0,0);//0.048,0.
 
-for (j=0; j<1; j++) {
+for (j=0; j<6; j++) {
 c_arr[i]->SetBottomMargin(0.25);
 c_arr[i]->SetTopMargin(0.17);
 c_arr[i]->SetLeftMargin(0.14);
@@ -115,9 +115,9 @@ qqq.str("");
 //qqq << "sector1_p_fid/ph_vs_th_p_1_w";
 qqq << "sector" << j+1 << "_pip_fid/ph_th_pip_" << j+1 << "["  << i << "]";
 cout << qqq.str().c_str() << "\n";
-MyFile->GetObject(qqq.str().c_str(),hist); 
-hist->SetMinimum(1.);
-hist->SetMaximum(50.);
+MyFile->GetObject(qqq.str().c_str(),hist[j]); 
+hist[j]->SetMinimum(1.);
+hist[0]->SetMaximum(5.);
 
  TCutG *cutg = new TCutG("cutg",5);
    cutg->SetPoint(0,0.,-29.5);
@@ -125,22 +125,23 @@ hist->SetMaximum(50.);
    cutg->SetPoint(2,109.,29.5);
    cutg->SetPoint(3,0., 29.5);
    cutg->SetPoint(4,0.,-29.5);
-hist->Draw("colz [cutg] same");
-hist->GetYaxis()->SetLabelSize(0.1);
-hist->GetZaxis()->SetLabelSize(0.1);
-hist->GetYaxis()->SetNdivisions(4);
-hist->GetXaxis()->SetLabelSize(0.1);
-hist->GetXaxis()->SetTitle("#theta (deg)");
-hist->GetYaxis()->SetTitle("#varphi (deg)");
-hist->GetYaxis()->SetTitleOffset(0.4);
-hist->GetZaxis()->SetLabelOffset(-0.005);
-hist->GetXaxis()->SetTitleOffset(0.7);
-hist->GetXaxis()->SetTitleSize(0.15);
-hist->GetYaxis()->SetTitleSize(0.15);
+if (j != 0)hist[0]->Add(hist[j]);   
+hist[0]->Draw("colz [cutg]");
+hist[j]->GetYaxis()->SetLabelSize(0.1);
+hist[j]->GetZaxis()->SetLabelSize(0.1);
+hist[j]->GetYaxis()->SetNdivisions(4);
+hist[j]->GetXaxis()->SetLabelSize(0.1);
+hist[j]->GetXaxis()->SetTitle("#theta (deg)");
+hist[j]->GetYaxis()->SetTitle("#varphi (deg)");
+hist[j]->GetYaxis()->SetTitleOffset(0.4);
+hist[j]->GetZaxis()->SetLabelOffset(-0.005);
+hist[j]->GetXaxis()->SetTitleOffset(0.7);
+hist[j]->GetXaxis()->SetTitleSize(0.15);
+hist[j]->GetYaxis()->SetTitleSize(0.15);
 qqq3.str("");
 qqq3 << 200*i << " < P_{#pi^{+}}< " << 200*(i+1) << " MeV";
 //qqq3 << 0.3*(60+6.666666*i)<< "< theta < " << 0.3*(60+6.66666*(i+1));
-hist->SetTitle(qqq3.str().c_str());
+hist[j]->SetTitle(qqq3.str().c_str());
 TF1 *f1 = new TF1("f1",ap,9.,100.,1);
  //f1->SetParameter(0,p);
 //f1->SetParameter(1,1.);
