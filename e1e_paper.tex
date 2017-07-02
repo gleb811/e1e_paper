@@ -622,7 +622,7 @@ where $M_{left}$ and $M_{right}$ are the left and right boundaries of  the invar
 \begin{figure}[htp]
 \begin{center}
 \frame{\includegraphics[width=8cm]{pictures/mass_corr/mass_tex.pdf}}
-\caption{\small Schematic representation of the cross sections in the next to last bin in the invariant mass $(M_{X_{1}X_{2}})$ for various $W$. Dot-dashed and dashed vertical lines show  maximal invariant mass values that can be reached with $W_{left}$ and $W_{right}$, respectively, while vertical black  lines show the boundaries of the next to last bin in the invariant mass.  \label{fig:mass_corr}}
+\caption{\small Schematic representation of the cross sections in the next to last bin in the invariant mass $(M_{h_{1}h_{2}})$ for various $W$. Dot-dashed and dashed vertical lines show  maximal invariant mass values that can be reached with $W_{left}$ and $W_{right}$, respectively, while vertical black  lines show the boundaries of the next to last bin in the invariant mass.  \label{fig:mass_corr}}
 \end{center}
 \end{figure}
 
@@ -787,7 +787,7 @@ while for the background channel $e p \rightarrow e'p'\pi^{+}\pi^{-}\pi^{0}$, wh
 
 \begin{figure}[htp]
 \begin{center}
-\includegraphics[width=7cm]{pictures/efficiency/eff_err.pdf}
+\includegraphics[width=7cm]{pictures/sec_kin_varefficiency/eff_err.pdf}
 \caption{\small Relative efficiency error versus efficiency for one particular bin in $W$ and $Q^2$ ($W = 1.6375$~GeV, $Q^2 = 0.525$~GeV$^2$). Color code shows the number of five-dimensional cells.} \label{fig:eff_err}
 \end{center}
 \end{figure}
@@ -968,6 +968,50 @@ Finally two parts of the statistical uncertainty given by Eq.~\eqref{staterrors}
 
 \subsection{Systematical uncertainties}
 
+The systematical uncertainties in this experiment appear to dominate the statistical ones and originate from the several sources.
+
+The presence of the elastic events
+in the dataset advantages the normalization verification of the extracted cross sections. For this purpose the elastic cross section was extracted and compared with the parametrization~\cite{Bosted:1994tm}, and 3\% fluctuation was revealed. Therefore this value was included into the systematical uncertainty  to the extracted double-pion cross sections as a global factor. This factor takes into account  inaccuracy in the luminosity calculation (due to miscalibrations of the Faraday cup, target
+density instabilities, etc.) as well as errors in the electron registration and identification.
+
+
+In order to study the systematical uncertainties, the double pion cross sections were obtained using the alternative method of the topology combination. In contrast with the main method, where the events from all four topologies were summed up in each multidumention bin, the alternative one considered only the events from the topology with the maximal efficiency. 
+ The difference between the cross sections obtained in these two ways was interpreted as a systematical uncertainty.
+Since various topologies correspond to the different registered final hadrons  this uncertainty includes the errors due to the hadron registration and identification. 
+This uncertainty was calculated for each bin in  $W$ and $Q^{2}$ and found to be of the order of 2\%.
+
+
+
+
+According to Sect.~\ref{sec_kin_var} the double-pion cross sections was extracted in three sets of the  kinematical variables. The difference between the cross sections obtained by integration over these three kinematical grids was interpreted as a systematical uncertainty. This  uncertainty was computed for each bin in $W$ and $Q^{2}$ and was typically of the order of 5\%.
+As the final results, the integrated cross sections that were averaged over these three grids are reported.
+
+
+Beside that, as a common practice~\cite{Fedotov:2008aa,Isupov:2017lnd},  an extra 5\% global uncertainty was assigned to the cross section due to the inclusive radiative correction procedure (see Sect.~\ref{rad_corr}).
+
+
+The uncertainties due to the sources mentioned above were summed up in qudrature to obtain the total systematical uncertainty to the integral double pion cross sections.
+
+
+
+\section{Comparison with the model and previously avaliable data}
+
+\subsection{Previously avaliable data}
+
+\begin{figure*}[htp]
+\begin{center}
+\includegraphics[width=15cm]{pictures/conclusions/e1e_e1c.pdf}
+\caption{\small The $W$ dependencies of the extracted  cross sections (circles) in comparison with the avaliable data~\cite{Fedotov:2008aa} (dimonds) for three bins in $Q^{2}$. Hatched areas correspond to the total uncertainties (sistematical and statistical).}
+\label{fig:e1e_e1c}
+\end{center}
+\end{figure*}
+
+
+In Fig.~\ref{fig:e1e_e1c} the comparison of integral double pion cross sections with the avaliable data~\cite{Fedotov:2008aa} is shown. 
+The cross sections~\cite{Fedotov:2008aa} were obtained with 1.515~GeV electron beam energy that makes their longitudinal parts slightly differ, thus intruducing a small systematical distortion into the comparison. The kinematical coverages of these two datasets overlap only in three bins in $Q^{2}$ which are shown in Fig.~\ref{fig:e1e_e1c}. Meanwhile, the cross sections presented here should be treated as more reliable since they were extracted with more advanced technique -- i.e., the combination of all four avaliable topologies was used instead of only two in the data~\cite{Fedotov:2008aa}, the map of empty cells was better determined using  the cut on the efficiency error, the contribution from the empty cells was accounted for by the advanced method using TWOPEG~\cite{Skorodum:EG}, and furthermore, finer binning in hadron variables was achieved. Nevertheless, Fig.~\ref{fig:e1e_e1c} demonstrates reasonable agreement between these two sets of cross sections within the total uncertainties.  
+
+
+\subsection{Comparison with the model }
 
 \begin{figure*}[htp]
 \begin{center}
@@ -979,17 +1023,6 @@ Finally two parts of the statistical uncertainty given by Eq.~\eqref{staterrors}
 \end{figure*}
 
 
-Discription + ref to the plots from Section "Comparison with the model".
-
-\section{Comparison with the model and previously avaliable data}
-
-\begin{figure*}[htp]
-\begin{center}
-\includegraphics[width=12cm]{pictures/conclusions/e1e_e1c.pdf}
-\caption{\small $W$ dependencies of the obtained in this analysis  cross sections (e1e dataset) in comparison with the cross sections from~\cite{Fedotov:2008aa} (e1c dataset) for three bins in $Q^{2}$. Hatched areas correspond to the total uncertainties (sistematical and statistical).}
-\label{fig:e1e_e1c}
-\end{center}
-\end{figure*}
 
 1D plot for one Q2 \& W bin + int plots with sys errors.
 
