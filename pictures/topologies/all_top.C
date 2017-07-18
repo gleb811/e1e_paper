@@ -268,15 +268,15 @@ max = (m_pip_p->GetMaximum())/2.;
 m_pip_p_model->SetMaximum(max);
 m_pip_p_model->SetLineWidth(2);
 
-draw_1d_hist(1,m_pip_p_model,qqq.str(),"h1prj_inv_m_pip_p_1_model","d#sigma/dM (#mubn/GeV)","m_{#pi^{+}p} (GeV)",1, 1,"B","mass",i);
+draw_1d_hist(1,m_pip_p_model,qqq.str(),"h1prj_inv_m_pip_p_1_model","d#sigma/dM (#mubn/GeV)","M_{#pi^{+}p} (GeV)",1, 1,"B","mass",i);
 qqq.str("");
 
-draw_1d_hist(1,m_pip_p,qqq.str(),"h1prj_inv_m_pip_p_1_","d#sigma/dM (#mubn/GeV)","m_{#pi^{+}p} (GeV)",1, 20,"e1P same","mass same",i);
+draw_1d_hist(1,m_pip_p,qqq.str(),"h1prj_inv_m_pip_p_1_","d#sigma/dM (#mubn/GeV)","M_{#pi^{+}p} (GeV)",1, 20,"e1P same","mass same",i);
 qqq.str("");
 
 //m_pip_p_noempty->Scale((m_pip_p->Integral())/(m_pip_p_noempty->Integral()));
 
-draw_1d_hist(1,m_pip_p_noempty,qqq.str(),"h1prj_inv_m_pip_p_1_gen","d#sigma/dM (#mubn/GeV)","m_{#pi^{+}p} (GeV)",1, 25,"e1AP same","mass",i);
+draw_1d_hist(1,m_pip_p_noempty,qqq.str(),"h1prj_inv_m_pip_p_1_gen","d#sigma/dM (#mubn/GeV)","M_{#pi^{+}p} (GeV)",1, 25,"e1AP same","mass",i);
 qqq.str("");
 
 
@@ -287,14 +287,14 @@ qqq.str("");
 m_pip_pim_model->SetMaximum(max);
 m_pip_pim_model->SetLineWidth(2);
 
-draw_1d_hist(2,m_pip_pim_model,"","h1prj_inv_m_pip_pim_1_model","d#sigma/dM (#mubn/GeV)","m_{#pi^{+}#pi^{-}} (GeV)",1, 1,"B","mass",i);
+draw_1d_hist(2,m_pip_pim_model,"","h1prj_inv_m_pip_pim_1_model","d#sigma/dM (#mubn/GeV)","M_{#pi^{+}#pi^{-}} (GeV)",1, 1,"B","mass",i);
 
 
-draw_1d_hist(2,m_pip_pim,"","h1prj_inv_m_pip_pim_1_","d#sigma/dM (#mubn/GeV)","m_{#pi^{+}#pi^{-}} (GeV)",1, 20,"e1P same","mass",i);
+draw_1d_hist(2,m_pip_pim,"","h1prj_inv_m_pip_pim_1_","d#sigma/dM (#mubn/GeV)","M_{#pi^{+}#pi^{-}} (GeV)",1, 20,"e1P same","mass",i);
 
 //m_pip_pim_noempty->Scale((m_pip_pim->Integral())/(m_pip_pim_noempty->Integral()));
 
-draw_1d_hist(2,m_pip_pim_noempty,"","h1prj_inv_m_pip_pim_1_gen","d#sigma/dM (#mubn/GeV)","m_{#pi^{+}#pi^{-}} (GeV)",1, 25,"e1AP same","mass",i);
+draw_1d_hist(2,m_pip_pim_noempty,"","h1prj_inv_m_pip_pim_1_gen","d#sigma/dM (#mubn/GeV)","M_{#pi^{+}#pi^{-}} (GeV)",1, 25,"e1AP same","mass",i);
 
 
 
@@ -304,13 +304,13 @@ draw_1d_hist(2,m_pip_pim_noempty,"","h1prj_inv_m_pip_pim_1_gen","d#sigma/dM (#mu
 m_pim_p_model->SetLineWidth(2);
 m_pim_p_model->SetMaximum(max);
 
-draw_1d_hist(3,m_pim_p_model,"","h3prj_inv_m_pim_p_1_model","d#sigma/dM (#mubn/GeV)","m_{#pi^{-}p} (GeV)",1, 1, "B","mass",i);
+draw_1d_hist(3,m_pim_p_model,"","h3prj_inv_m_pim_p_1_model","d#sigma/dM (#mubn/GeV)","M_{#pi^{-}p} (GeV)",1, 1, "B","mass",i);
 
-draw_1d_hist(3,m_pim_p,"","h3prj_inv_m_pim_p_1_","d#sigma/dM (#mubn/GeV)","m_{#pi^{-}p} (GeV)",1, 20, "e1P same","mass",i);
+draw_1d_hist(3,m_pim_p,"","h3prj_inv_m_pim_p_1_","d#sigma/dM (#mubn/GeV)","M_{#pi^{-}p} (GeV)",1, 20, "e1P same","mass",i);
 
 //m_pim_p_noempty->Scale((m_pim_p->Integral())/(m_pim_p_noempty->Integral()));
 
-draw_1d_hist(3,m_pim_p_noempty,"","h3prj_inv_m_pim_p_1_gen","d#sigma/dM (#mubn/GeV)","m_{#pi^{-}p} (GeV)",1, 25, "e1AP same","mass",i);
+draw_1d_hist(3,m_pim_p_noempty,"","h3prj_inv_m_pim_p_1_gen","d#sigma/dM (#mubn/GeV)","M_{#pi^{-}p} (GeV)",1, 25, "e1AP same","mass",i);
 
 
 

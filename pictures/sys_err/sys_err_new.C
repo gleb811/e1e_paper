@@ -7,7 +7,13 @@ TH1D *m_pip_p_bin_corr,*m_pip_pim_bin_corr,*m_pim_p_bin_corr;
 TH1D *theta_p_bin_corr,*theta_pim_bin_corr,*theta_pip_bin_corr;
 TH1D *alpha_p_bin_corr,*alpha_pim_bin_corr,*alpha_pip_bin_corr;
 
+TH1D *m_pip_p_model,*m_pip_pim_model,*m_pim_p_model;
+TH1D *theta_p_model,*theta_pim_model,*theta_pip_model;
+TH1D *alpha_p_model,*alpha_pim_model,*alpha_pip_model;
+
+
 TH1D *h_w[12];
+TH1D *h_w_model[12];
 TH1D *h_w_err[12];
 Float_t full_err[22][12];
 
@@ -610,6 +616,63 @@ qqq.str("");
 
 };
 
+void read_EG(TFile *file_eff,Int_t i) {
+
+file_eff->cd();
+
+qqq.str("");
+qqq << "q2_" << Q2_bin << "/w_" << W_bin[i] << "/model_pipP_1_";
+gDirectory->GetObject(qqq.str().c_str(),m_pip_p_model);
+qqq.str("");
+
+qqq.str("");
+qqq << "q2_" << Q2_bin << "/w_" << W_bin[i] << "/model_pippim_1_";
+gDirectory->GetObject(qqq.str().c_str(),m_pip_pim_model);
+qqq.str("");
+
+qqq.str("");
+qqq << "q2_" << Q2_bin << "/w_" << W_bin[i] << "/model_pimP_1_";
+gDirectory->GetObject(qqq.str().c_str(),m_pim_p_model);
+qqq.str("");
+
+qqq.str("");
+qqq << "q2_" << Q2_bin << "/w_" << W_bin[i] << "/model_thetaP_";
+gDirectory->GetObject(qqq.str().c_str(),theta_p_model);
+qqq.str("");
+
+qqq.str("");
+qqq << "q2_" << Q2_bin << "/w_" << W_bin[i] << "/model_thetapim_";
+gDirectory->GetObject(qqq.str().c_str(),theta_pim_model);
+qqq.str("");
+
+qqq.str("");
+qqq << "q2_" << Q2_bin << "/w_" << W_bin[i] << "/model_thetapip_";
+gDirectory->GetObject(qqq.str().c_str(),theta_pip_model);
+qqq.str("");
+
+qqq.str("");
+qqq << "q2_" << Q2_bin << "/w_" << W_bin[i] << "/model_alpha_proton_";
+gDirectory->GetObject(qqq.str().c_str(),alpha_p_model);
+qqq.str("");
+
+qqq.str("");
+qqq << "q2_" << Q2_bin << "/w_" << W_bin[i] << "/model_alpha_pim_";
+gDirectory->GetObject(qqq.str().c_str(),alpha_pim_model);
+qqq.str("");
+
+qqq.str("");
+qqq << "q2_" << Q2_bin << "/w_" << W_bin[i] << "/model_alpha_pip_";
+gDirectory->GetObject(qqq.str().c_str(),alpha_pip_model);
+qqq.str("");
+
+
+
+
+
+
+};
+
+
 
 
 void sys_err_new() {
@@ -635,6 +698,8 @@ c->Divide(4,3);
 TFile *file_cr_sec_pim = new TFile("out_cr_sec_all_top_final_bin_corr.root","READ");
 
 TFile *file_max_eff = new TFile("out_cr_sec_all_top_final_bin_corr_eff.root","READ");
+
+TFile *file_EG = new TFile("EG.root","READ");
 
 
  for (Int_t qq2=0; qq2<12;qq2++) {
@@ -662,6 +727,13 @@ qqq << "Q^{2} = " << Q2_bin << " GeV^{2}";
 h_w[qq2] = new TH1D(qqq.str().c_str(),qqq.str().c_str(),21,1.3,1.825);
 qqq.str("");
 
+qqq.str("");
+qqq << "Q^{2}_{model} = " << Q2_bin << " GeV^{2}";
+
+
+h_w_model[qq2] = new TH1D(qqq.str().c_str(),qqq.str().c_str(),21,1.3,1.825);
+qqq.str("");
+
 qqq << "Q^{2} = " << Q2_bin << " GeV^{2} err";
 h_w_err[qq2] = new TH1D(qqq.str().c_str(),qqq.str().c_str(),21,1.3,1.825);
 
@@ -672,6 +744,7 @@ for (Int_t i=get_min_w(Q2_bin); i<get_max_w(Q2_bin);i++) {
 
 read_data_rec(file_cr_sec_pim,i);
 read_data_eff(file_max_eff,i);
+read_EG(file_EG,i);
 
 m_pip_pim->Scale(m_pip_pim->GetBinWidth(1));
 m_pip_p->Scale(m_pip_p->GetBinWidth(1));
@@ -727,7 +800,30 @@ w_int_eff = w_int_eff/3.;
 //cout << w_int << "  " << w_int_eff << endl;
 
 h_w[qq2]->SetBinContent(i+1,w_int);
-if (qq2 == 3) cout << m_pip_pim->Integral() << " " << w_int  << " " << w_int_eff << endl;
+
+m_pip_pim_model->Scale(m_pip_pim_model->GetBinWidth(1));
+m_pip_p_model->Scale(m_pip_p_model->GetBinWidth(1));
+m_pim_p_model->Scale(m_pim_p_model->GetBinWidth(1));
+alpha_pim_model->Scale((alpha_pim_model->GetBinWidth(1))*3.1415/180.);
+alpha_p_model->Scale((alpha_p_model->GetBinWidth(1))*3.1415/180.);
+alpha_pip_model->Scale((alpha_pip_model->GetBinWidth(1))*3.1415/180.);
+Double_t w_int_model;
+//w_int_model = (m_pip_pim_model->Integral())+(m_pip_p_model->Integral())+(m_pim_p_model->Integral());
+w_int_model = (alpha_pim_model->Integral())+(alpha_p_model->Integral())+(alpha_pip_model->Integral());
+
+//cout << alpha_pim_model->Integral(1,alpha_pim_model->GetNbinsX()) << "   " << alpha_pim->Integral() << endl;
+
+w_int_model = w_int_model/3.;
+
+h_w_model[qq2]->SetBinContent(i+1,w_int_model);
+
+
+
+
+//cout << w_int << "  " << w_int_eff << endl;
+
+h_w[qq2]->SetBinContent(i+1,w_int);
+//if (qq2 == 3) cout << m_pip_pim->Integral() << " " << w_int  << " " << w_int_eff << endl;
 Double_t err_total;
 //m_pip_pim->IntegralAndError(1,m_pip_pim->GetNbinsX(),w_err);
 //err_total = w_err*w_err;
@@ -773,6 +869,10 @@ aeyl[i] = w_int*0.05;
 aeyh[i] = w_int*0.05;
 
 Double_t sys_err;
+
+
+h_w_model[qq2]->SetBinError(i+1,0.);
+
 
 /*
 sys_err = ((w_int - m_pip_pim->Integral())*(w_int - m_pip_pim->Integral()));
@@ -843,23 +943,538 @@ gae->GetXaxis()->SetTitleSize(0.08);
  gae->GetYaxis()->SetTitleSize(0.08);
  gae->GetYaxis()->SetTitleOffset(1.3);
  gae->GetXaxis()->SetLabelSize(0.08);
+ gae->GetYaxis()->SetLabelSize(0.08); 
 gae->GetXaxis()->SetTitle("W (GeV)");
 gae->GetYaxis()->SetTitle("#sigma (#mubn)");   
-   gae->SetFillColor(1);
-   gae->SetFillStyle(3001);
-   gae->SetMinimum(0.);
+//   gae->SetFillColor(1);
+   gae->SetFillStyle(3005); 
+   gae->SetMinimum(0.2);
    gae->SetMaximum(40.);
    gae->GetXaxis()->SetRangeUser(1.2875,1.85);
 
-
-gae->Draw("a2");
-h_w[qq2]->Draw("e1P same");
+gae->SetMarkerStyle(20);
+gae->SetMarkerSize(0.6);
+//gae->Draw("a2");
+gae->Draw("AP0");
+//h_w[qq2]->Draw("e1P same");
 
 //h_w_err[qq2]->SetMarkerStyle(20);
 //h_w_err[qq2]->SetMarkerSize(2);
 h_w_err[qq2]->SetLineColor(1);
 h_w_err[qq2]->SetFillColor(1);
 h_w_err[qq2]->Draw("same ][");
+
+
+h_w_model[qq2]->SetLineWidth(2.);
+h_w_model[qq2]->SetLineColor(kBlack);
+Double_t factor = ((h_w[qq2]->Integral())/(h_w_model[qq2]->Integral()));
+cout << "factor = " << factor << " Q2 = " << Q2_bin << endl;
+factor = 1.;
+h_w_model[qq2]->Scale((h_w[qq2]->Integral())/(h_w_model[qq2]->Integral()));
+//cout << "factor[" << qq2 << "]=" <<  (h_w[qq2]->Integral())/(h_w_model[qq2]->Integral()) << ";" << endl;
+
+if(qq2==0)h_w_model[0]->GetXaxis()->SetRangeUser(1.6,1.8125);
+if(qq2==2)h_w_model[2]->GetXaxis()->SetRangeUser(1.3,1.7875);
+if(qq2==3)h_w_model[3]->GetXaxis()->SetRangeUser(1.3,1.7875);
+if(qq2==4)h_w_model[4]->GetXaxis()->SetRangeUser(1.3,1.7625);
+if(qq2==5)h_w_model[5]->GetXaxis()->SetRangeUser(1.3,1.7375);
+if(qq2==6)h_w_model[6]->GetXaxis()->SetRangeUser(1.3,1.7125);
+if(qq2==7)h_w_model[7]->GetXaxis()->SetRangeUser(1.3,1.6875);
+if(qq2==8)h_w_model[8]->GetXaxis()->SetRangeUser(1.3,1.6375);
+if(qq2==9)h_w_model[9]->GetXaxis()->SetRangeUser(1.3,1.6125);
+if(qq2==10)h_w_model[10]->GetXaxis()->SetRangeUser(1.3,1.5875);
+if(qq2==11)h_w_model[11]->GetXaxis()->SetRangeUser(1.3,1.5375);
+
+h_w_model[qq2]->Draw("same ][ L");
+
+
+
+
+
+
+
+
+
+
+
+
+if (qq2==0) {
+Double_t w_values[9]={1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={3.07158, 5.02006, 7.2034, 11.2869, 14.1014, 17.9653, 20.5538, 27.2129, 30.0085, 32.6551, 32.1707, 30.9483, 29.3869, 25.357, 19.3566, 13.8919, 10.9587};
+
+//Double_t data_int_mod_res[17] ={1.9264, 3.09148, 4.47598, 7.02632, 8.37201, 9.02445, 8.46081, 8.62866, 9.19142, 10.7838, 12.3823, 14.8718, 15.8047, 14.764, 12.3983, 9.8233, 8.34427};
+
+Double_t data_int_mod_res[9] ={9.19142, 10.7838, 12.3823, 14.8718, 15.8047, 14.764, 12.3983, 9.8233, 8.34427};
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(9,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+
+
+
+
+if (qq2==1) {
+Double_t w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={2.64723, 4.29793, 6.17725, 9.69122, 12.0081, 14.8764, 16.5312, 21.2103, 23.3065, 25.696, 25.9832, 26.2029, 25.6492, 22.4934, 17.3137, 12.5073, 9.97956};
+
+Double_t data_int_mod_res[17] ={1.84033, 2.93754, 4.25271, 6.68189, 7.95812, 8.54494, 7.95527, 8.02193, 8.50501, 10.0102, 11.5962, 14.18, 15.2281, 14.2865, 11.9904, 9.43985, 8.03662};
+
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(17,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+
+
+
+
+
+
+if (qq2==2) {
+Double_t w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={2.34137, 3.77058, 5.42355, 8.51528, 10.4781, 12.6646, 13.6885, 17.0021, 18.5783, 20.6855, 21.4031, 22.5324, 22.6738, 20.1758, 15.6592, 11.3803, 9.18491};
+
+//Double_t data_int_mod_res[16] ={2.34137, 3.77058, 5.42355, 8.51528, 10.4781, 12.6646, 13.6885, 17.0021, 18.5783, 20.6855, 21.4031, 22.5324, 22.6738, 20.1758, 15.6592, 11.3803};
+
+Double_t data_int_mod_res[16] ={1.76479, 2.79763, 4.04651, 6.35905, 7.5726, 8.11025, 7.50851, 7.4954, 7.91057, 9.34207, 10.9165, 13.5849, 14.7241, 13.8644, 11.6367, 9.10399};
+
+
+
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(16,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+
+
+
+
+if (qq2==3) {
+Double_t w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={2.1135, 3.37078, 4.84748, 7.61084, 9.31088, 11.0154, 11.6025, 13.946, 15.1302, 16.9752, 17.9396, 19.6721, 20.3047, 18.3081, 14.3306, 10.4695, 8.54533};
+
+//Double_t data_int_mod_res[16] ={2.1135, 3.37078, 4.84748, 7.61084, 9.31088, 11.0154, 11.6025, 13.946, 15.1302, 16.9752, 17.9396, 19.6721, 20.3047, 18.3081, 14.3306, 10.4695};
+
+
+Double_t data_int_mod_res[16] ={1.78712, 2.79597, 4.01087, 6.25888, 7.45211, 8.02306, 7.48197, 7.53435, 8.01827, 9.68565, 11.5884, 15.2591, 17.4502, 16.4844, 13.0421, 9.64917};
+
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(16,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+
+
+
+
+
+
+if (qq2==4) {
+Double_t w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={1.94107, 3.06088, 4.39583, 6.89446, 8.39278, 9.74936, 10.031, 11.6736, 12.5616, 14.1845, 15.2957, 17.4439, 18.4216, 16.8059, 13.2689, 9.73721, 8.0334};
+
+//Double_t data_int_mod_res[15] ={1.94107, 3.06088, 4.39583, 6.89446, 8.39278, 9.74936, 10.031, 11.6736, 12.5616, 14.1845, 15.2957, 17.4439, 18.4216, 16.8059, 13.2689};
+
+
+Double_t data_int_mod_res[15] ={1.70933, 2.65116, 3.79774, 5.92327, 7.05253, 7.57866, 7.03202, 7.00709, 7.41049, 8.94891, 10.763, 14.3281, 16.4234, 15.5425, 12.3873};
+
+
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(15,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+
+
+if (qq2==5) {
+Double_t w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={1.81058, 2.8181, 4.03632, 6.31531, 7.65434, 8.75588, 8.82375, 9.95462, 10.6192, 12.0608, 13.2584, 15.6832, 16.8864, 15.5582, 12.3907, 9.13265, 7.61308};
+
+//Double_t data_int_mod_res[17] ={1.66996, 2.5727, 3.67779, 5.72491, 6.82847, 7.38529, 6.9075, 6.97216, 7.4556, 9.20648, 11.129, 14.4894, 16.1412, 15.0591, 12.0162, 8.88832, 7.43579};
+
+
+Double_t data_int_mod_res[14] ={1.66996, 2.5727, 3.67779, 5.72491, 6.82847, 7.38529, 6.9075, 6.97216, 7.4556, 9.20648, 11.129, 14.4894, 16.1412, 15.0591};
+
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(14,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+
+if (qq2==6) {
+Double_t w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={1.71295, 2.62694, 3.74691, 5.83872, 7.04814, 7.95922, 7.87786, 8.63096, 9.12473, 10.4133, 11.6484, 14.2148, 15.5352, 14.4269, 11.5888, 8.59326, 7.24104};
+
+Double_t data_int_mod_res[13] ={1.7127, 2.6265, 3.74627, 5.83767, 7.04671, 7.95698, 7.87484, 8.62605, 9.11793, 10.4016, 11.6315, 14.1883, 15.5081};
+
+//Double_t data_int_mod_res[17] ={1.7127, 2.6265, 3.74627, 5.83767, 7.04671, 7.95698, 7.87484, 8.62605, 9.11793, 10.4016, 11.6315, 14.1883, 15.5081, 14.4008, 11.5623, 8.57487, 7.22601};
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(13,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+
+if (qq2==7) {
+Double_t w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={1.6413, 2.47586, 3.5114, 5.43957, 6.5401, 7.30539, 7.12002, 7.59014, 7.94959, 9.09923, 10.3263, 12.9011, 14.246, 13.313, 10.7877, 8.07464, 6.88746};
+
+Double_t data_int_mod_res[12] ={1.6413, 2.47586, 3.5114, 5.43957, 6.5401, 7.30539, 7.12002, 7.59014, 7.94959, 9.09923, 10.3263, 12.9011};
+
+//Double_t data_int_mod_res[17] ={1.6413, 2.47586, 3.5114, 5.43957, 6.5401, 7.30539, 7.12002, 7.59014, 7.94959, 9.09923, 10.3263, 12.9011, 14.246, 13.313, 10.7877, 8.07464, 6.88746};
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(12,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+
+if (qq2==8) {
+Double_t w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={1.59047, 2.35652, 3.31844, 5.10099, 6.10773, 6.75907, 6.50226, 6.75916, 7.01152, 8.03277, 9.21851, 11.7036, 13.0081, 12.2204, 9.99384, 7.57735, 6.55313};
+
+Double_t data_int_mod_res[10] ={1.59047, 2.35652, 3.31844, 5.10099, 6.10773, 6.75907, 6.50226, 6.75916, 7.01152, 8.03277};
+
+//Double_t data_int_mod_res[17] ={1.6413, 2.47586, 3.5114, 5.43957, 6.5401, 7.30539, 7.12002, 7.59014, 7.94959, 9.09923, 10.3263, 12.9011, 14.246, 13.313, 10.7877, 8.07464, 6.88746};
+
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(10,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+if (qq2==9) {
+Double_t w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={1.55666, 2.26314, 3.16047, 4.81228, 5.73703, 6.29845, 5.9948, 6.09279, 6.26104, 7.16944, 8.29923, 10.6505, 11.8823, 11.2146, 9.26174, 7.12728, 6.25477};
+
+Double_t data_int_mod_res[9] ={1.55666, 2.26314, 3.16047, 4.81228, 5.73703, 6.29845, 5.9948, 6.09279, 6.26104};
+
+//Double_t data_int_mod_res[17] ={1.55666, 2.26314, 3.16047, 4.81228, 5.73703, 6.29845, 5.9948, 6.09279, 6.26104, 7.16944, 8.29923, 10.6505, 11.8823, 11.2146, 9.26174, 7.12728, 6.25477};
+
+
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(9,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+
+if (qq2==10) {
+Double_t w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={1.53701, 2.19138, 3.03188, 4.56564, 5.41792, 5.90783, 5.57599, 5.55767, 5.66121, 6.47539, 7.54795, 9.76091, 10.9108, 10.3405, 8.62711, 6.73985, 6.00117};
+
+Double_t data_int_mod_res[8] ={1.53701, 2.19138, 3.03188, 4.56564, 5.41792, 5.90783, 5.57599, 5.55767};
+
+
+//Double_t data_int_mod_res[17] ={1.53701, 2.19138, 3.03188, 4.56564, 5.41792, 5.90783, 5.57599, 5.55767, 5.66121, 6.47539, 7.54795, 9.76091, 10.9108, 10.3405, 8.62711, 6.73985, 6.00117};
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(8,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+
+if (qq2==11) {
+Double_t w_values[17]={1.4125,1.4375,1.4625,1.4875,1.5125,1.5375,1.5625,1.5875,1.6125,1.6375,1.6625,1.6875,1.7125,1.7375,1.7625,1.7875,1.8125};
+
+//Double_t data_int_mod_res[17] ={1.52924, 2.13774, 2.92806, 4.35458, 5.142, 5.57416, 5.22772, 5.1251, 5.17893, 5.91548, 6.93444, 9.02027, 10.09, 9.59839, 8.08973, 6.41172, 5.78866};
+
+//Double_t data_int_mod_res[6] ={1.52924, 2.13774, 2.92806, 4.35458, 5.142, 5.57416};
+Double_t data_int_mod_res[6] ={1.52924, 2.13774, 2.92806, 4.35458, 5.142, 5.57416};
+
+//Double_t data_int_mod_res[17] ={1.52924, 2.13774, 2.92806, 4.35458, 5.142, 5.57416, 5.22772, 5.1251, 5.17893, 5.91548, 6.93444, 9.02027, 10.09, 9.59839, 8.08973, 6.41172, 5.78866};
+
+
+
+TGraph *gr_int_mod_res;
+gr_int_mod_res = new TGraph(6,w_values ,data_int_mod_res);
+gr_int_mod_res->SetMarkerStyle(20);
+gr_int_mod_res->SetLineWidth(2);
+gr_int_mod_res->SetLineStyle(2);
+gr_int_mod_res->SetMarkerColor(kBlack);
+
+
+  Double_t x,y; 
+  for (Int_t iiii = 0; iiii < gr_int_mod_res->GetN(); iiii++){     gr_int_mod_res->GetPoint(iiii, x, y); 
+
+      y = y * factor;
+      gr_int_mod_res->SetPoint(iiii, x, y);
+
+  } 
+  
+  
+  
+  
+  
+
+gr_int_mod_res->Draw("same");
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 };
 
