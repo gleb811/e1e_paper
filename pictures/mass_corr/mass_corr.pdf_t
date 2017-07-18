@@ -1,0 +1,27 @@
+\begin{picture}(0,0)%
+\includegraphics{mass_corr.pdf}%
+\end{picture}%
+\setlength{\unitlength}{4144sp}%
+%
+\begingroup\makeatletter\ifx\SetFigFont\undefined%
+\gdef\SetFigFont#1#2#3#4#5{%
+  \reset@font\fontsize{#1}{#2pt}%
+  \fontfamily{#3}\fontseries{#4}\fontshape{#5}%
+  \selectfont}%
+\fi\endgroup%
+\begin{picture}(8166,4291)(3568,-3275)
+\put(5401,749){\makebox(0,0)[lb]{\smash{{\SetFigFont{20}{24.0}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{0,0,0}$W_{left} < W < W_{right}$}%
+}}}}
+\put(4096,-601){\rotatebox{90.0}{\makebox(0,0)[lb]{\smash{{\SetFigFont{29}{34.8}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{0,0,0}$\frac{d\sigma}{dM_{h_{1}h_{2}}}$}%
+}}}}}
+\put(4231,-3166){\makebox(0,0)[lb]{\smash{{\SetFigFont{20}{24.0}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{0,0,0}$M_{left}^{N_{bins}-1}$}%
+}}}}
+\put(5581,-3166){\makebox(0,0)[lb]{\smash{{\SetFigFont{20}{24.0}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{0,0,0}$W_{left}-m_{h_{3}}$}%
+}}}}
+\put(7426,-3166){\makebox(0,0)[lb]{\smash{{\SetFigFont{20}{24.0}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{0,0,0}$M_{right}^{N_{bins}-1}$}%
+}}}}
+\put(8776,-3166){\makebox(0,0)[lb]{\smash{{\SetFigFont{20}{24.0}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{0,0,0}$W_{right}-m_{h_{3}}$}%
+}}}}
+\put(11026,-3166){\makebox(0,0)[lb]{\smash{{\SetFigFont{20}{24.0}{\rmdefault}{\bfdefault}{\updefault}{\color[rgb]{0,0,0}$M_{X_{1}X_{2}}$}%
+}}}}
+\end{picture}%
